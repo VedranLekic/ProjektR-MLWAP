@@ -1,0 +1,24 @@
+.header {
+    background-color: white;
+    padding: 20px;
+    color: black;
+    text-align: center;
+    display:flex;
+    height: 100px;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    border-radius: 10px;
+    align-items: center;
+  }
+
+.mldf-icon {
+    height: 100px;
+}
+.menu-button {
+    height: 50px;
+    margin-right: 20px;
+}
+img:hover {
+    cursor: pointer;
+}

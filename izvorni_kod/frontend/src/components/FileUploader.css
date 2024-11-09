@@ -1,0 +1,26 @@
+.file-uploader {
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  width: 70%;
+}
+
+.file-input {
+  padding: 10px;
+  margin-left: 70px;
+  
+}
+
+.file-info {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: inline-block;
+}
