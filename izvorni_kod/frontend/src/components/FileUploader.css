@@ -1,6 +1,6 @@
 .file-uploader {
   padding: 20px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   margin: 0 auto;
   text-align: center;
@@ -13,8 +13,51 @@
 
 .file-input {
   padding: 10px;
-  margin-left: 70px;
-  
+  margin-bottom: 20px;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dropdown-container label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.dropdown-container select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 
 .file-info {
