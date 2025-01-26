@@ -45,7 +45,7 @@ public class TwistedTransistor {
 		}*/
 		
 		
-		Path izl= Files.createTempFile("myapp-", ".tmp");
+		Path izl= Files.createTempFile("myapp-", ".txt");
 		
 		if(inJeSad != inMoraBiti) {
 			String pom="";

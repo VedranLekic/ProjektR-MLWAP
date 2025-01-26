@@ -20,34 +20,58 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.projektER.service.CSVmanipulator;
+import com.projektER.service.ExcelManipulator;
+import com.projektER.service.JsonManipulator;
 import com.projektER.service.TwistedTransistor;
 
 @RestController
 @RequestMapping("/api")
 public class FileController {
 
-    private File processedFile; // Stores the processed file reference
+    private File processedFile;
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> handleFileUpload(@RequestPart("file") MultipartFile file) throws IOException {
-        // Save the uploaded file to a temporary location
+     
         Path tempFilePath = Paths.get(System.getProperty("java.io.tmpdir"), file.getOriginalFilename());
         file.transferTo(tempFilePath.toFile());
 
-        // Process the file
+      
         TwistedTransistor tw = new TwistedTransistor();
+        CSVmanipulator csvm= new CSVmanipulator();
+        ExcelManipulator em= new ExcelManipulator();
+        JsonManipulator jm= new JsonManipulator();
+        if(tempFilePath.toString().endsWith("txt")){
         processedFile = tw.transfer(10, 11, tempFilePath.toString());
+        
+        }
+        else if(tempFilePath.toString().endsWith("csv")) {
+        	
+        	processedFile = csvm.transfer(10, 11, tempFilePath.toString());
+        }
+        else if(tempFilePath.toString().contains("xlsx")) {
+        	
+        	processedFile = em.transfer(10, 11, tempFilePath.toString());
+        }
+         else if(tempFilePath.toString().contains("json")) {
+        	
+        	processedFile = jm.transfer(10, 11, tempFilePath.toString());
+        }
+        else{
+        	System.out.println("Proslo te brate "+tempFilePath.toString());
+        }
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "File processed successfully");
-        response.put("fileName", processedFile.getName()); // Include the filename
+        response.put("fileName", processedFile.getName()); 
         return ResponseEntity.ok(response); // Returns JSON
     }
     
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName) {
         try {
-            // Resolve the file path using the system's temp directory
+           
             Path filePath = Paths.get(System.getProperty("java.io.tmpdir"), fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
