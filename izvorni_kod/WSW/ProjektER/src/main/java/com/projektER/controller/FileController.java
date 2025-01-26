@@ -45,7 +45,7 @@ public class FileController {
     }
     
     @GetMapping("/download/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName) {
         try {
             // Resolve the file path using the system's temp directory
             Path filePath = Paths.get(System.getProperty("java.io.tmpdir"), fileName).normalize();

@@ -29,6 +29,7 @@ public class TwistedTransistor {
 		}
 		
 		//System.out.println("ovov je: "+tmpF.length());
+		fw.close();
 		return tmpF;
 		
 	}
