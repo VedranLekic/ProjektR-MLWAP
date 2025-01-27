@@ -33,7 +33,7 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> handleFileUpload(@RequestPart("file") MultipartFile file) throws IOException {
-     
+       
         Path tempFilePath = Paths.get(System.getProperty("java.io.tmpdir"), file.getOriginalFilename());
         file.transferTo(tempFilePath.toFile());
 
@@ -42,6 +42,8 @@ public class FileController {
         CSVmanipulator csvm= new CSVmanipulator();
         ExcelManipulator em= new ExcelManipulator();
         JsonManipulator jm= new JsonManipulator();
+        
+        
         if(tempFilePath.toString().endsWith("txt")){
         processedFile = tw.transfer(10, 11, tempFilePath.toString());
         
@@ -59,7 +61,7 @@ public class FileController {
         	processedFile = jm.transfer(10, 11, tempFilePath.toString());
         }
         else{
-        	System.out.println("Proslo te brate "+tempFilePath.toString());
+        	System.out.println("Proslo"+tempFilePath.toString());
         }
 
         Map<String, String> response = new HashMap<>();
