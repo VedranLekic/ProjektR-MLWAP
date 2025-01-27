@@ -91,19 +91,17 @@ const FileUploader = () => {
           className="file-input"
           required
         />
-
-        <div className="input-container">
-          <label>
-            Enter a number:
-            <input
-              type="number"
-              value={userNumber}
-              onChange={handleNumberChange}
-              className="number-input"
-              required
-            />
-          </label>
-        </div>
+    <div className="input-container">
+      <label htmlFor="userNumber">Enter a number:</label>
+        <input
+          id="userNumber"
+          type="number"
+          value={userNumber}
+          onChange={handleNumberChange}
+          className="number-input"
+          required
+        />
+      </div>
         <div className="dropdown-container">
           <label>
             Data type:
