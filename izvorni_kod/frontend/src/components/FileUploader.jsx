@@ -8,6 +8,7 @@ const FileUploader = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [processedFileName, setProcessedFileName] = useState("");
+  const [userNumber, setUserNumber] = useState("");
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -19,6 +20,10 @@ const FileUploader = () => {
 
   const handleFrameworkChange = (e) => {
     setSelectedFramework(e.target.value);
+  };
+
+  const handleNumberChange = (e) => {
+    setUserNumber(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -36,6 +41,7 @@ const FileUploader = () => {
     formData.append("file", file);
     formData.append("dataType", selectedDataType);
     formData.append("desiredFramework", selectedFramework);
+    formData.append("userNumber", userNumber);
 
     try {
       const response = await fetch("http://localhost:8080/api/upload", {
@@ -85,6 +91,19 @@ const FileUploader = () => {
           className="file-input"
           required
         />
+
+        <div className="input-container">
+          <label>
+            Enter a number:
+            <input
+              type="number"
+              value={userNumber}
+              onChange={handleNumberChange}
+              className="number-input"
+              required
+            />
+          </label>
+        </div>
         <div className="dropdown-container">
           <label>
             Data type:
@@ -115,11 +134,7 @@ const FileUploader = () => {
             </select>
           </label>
         </div>
-        <button
-          type="submit"
-          className="submit-button"
-          disabled={isLoading}
-        >
+        <button type="submit" className="submit-button" disabled={isLoading}>
           {isLoading ? "Processing..." : "Format File"}
         </button>
         {error && <p className="error-message">{error}</p>}
