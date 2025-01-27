@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,11 +33,11 @@ public class FileController {
     private File processedFile;
 
     @PostMapping("/upload")
-    public ResponseEntity<Map<String, String>> handleFileUpload(@RequestPart("file") MultipartFile file) throws IOException {
-       
+    public ResponseEntity<Map<String, String>> handleFileUpload(@RequestPart("file") MultipartFile file, @RequestParam("userNumber") int number) throws IOException {
+      
         Path tempFilePath = Paths.get(System.getProperty("java.io.tmpdir"), file.getOriginalFilename());
         file.transferTo(tempFilePath.toFile());
-
+        
       
         TwistedTransistor tw = new TwistedTransistor();
         CSVmanipulator csvm= new CSVmanipulator();
@@ -45,20 +46,20 @@ public class FileController {
         
         
         if(tempFilePath.toString().endsWith("txt")){
-        processedFile = tw.transfer(10, 11, tempFilePath.toString());
+        processedFile = tw.transfer(number, 11, tempFilePath.toString());
         
         }
         else if(tempFilePath.toString().endsWith("csv")) {
         	
-        	processedFile = csvm.transfer(10, 11, tempFilePath.toString());
+        	processedFile = csvm.transfer(number, 11, tempFilePath.toString());
         }
         else if(tempFilePath.toString().contains("xlsx")) {
         	
-        	processedFile = em.transfer(10, 11, tempFilePath.toString());
+        	processedFile = em.transfer(number, 11, tempFilePath.toString());
         }
          else if(tempFilePath.toString().contains("json")) {
         	
-        	processedFile = jm.transfer(10, 11, tempFilePath.toString());
+        	processedFile = jm.transfer(number, 11, tempFilePath.toString());
         }
         else{
         	System.out.println("Proslo"+tempFilePath.toString());
