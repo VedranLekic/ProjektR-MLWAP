@@ -29,6 +29,7 @@ public class TwistedTransistor {
 		}
 		
 		//System.out.println("ovov je: "+tmpF.length());
+		fw.close();
 		return tmpF;
 		
 	}
@@ -44,7 +45,7 @@ public class TwistedTransistor {
 		}*/
 		
 		
-		Path izl= Files.createTempFile("myapp-", ".tmp");
+		Path izl= Files.createTempFile("myapp-", ".txt");
 		
 		if(inJeSad != inMoraBiti) {
 			String pom="";

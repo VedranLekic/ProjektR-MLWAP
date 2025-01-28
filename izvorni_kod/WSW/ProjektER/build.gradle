@@ -24,6 +24,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'com.opencsv:opencsv:5.7.1'
+	implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
 
 tasks.named('test') {
